@@ -1,0 +1,99 @@
+/* 
+  FUNCTION: 
+  This script is meant to be used for making a full load on the tables that have been created in the database. 
+  First it cleans the tables in case they have data in them, and then loads the data from the source in each
+  corresponding table. Finally it checks if the row number is the same as the source table. 
+
+  WARNING:
+  This script clears all the data from the tables, so use it with caution. 
+  Check the content of the tables before making any execution and check if 
+  you have any copy of the important content first.
+
+*/
+
+-- Clean the data from the table if it has
+TRUNCATE TABLE bronze.crm_cust_info;
+
+-- Load the data into the table as a full load
+BULK INSERT [bronze].[crm_cust_info]
+FROM 'UnknownForPrivacy'
+WITH (
+	FIRSTROW = 2,
+	FIELDTERMINATOR = ',',
+	TABLOCK
+);
+
+-- Count the row number in order to compare it with the source
+SELECT
+COUNT(*) TotalColumns
+FROM bronze.crm_cust_info;
+
+TRUNCATE TABLE [bronze].[crm_prd_info];
+
+BULK INSERT [bronze].[crm_prd_info]
+FROM 'UnknownForPrivacy'
+WITH(
+	FIRSTROW = 2,
+	FIELDTERMINATOR = ',',
+	TABLOCK
+)
+
+SELECT
+COUNT(*) TotalColumns
+FROM bronze.crm_prd_info;
+
+TRUNCATE TABLE [bronze].[crm_sales_details];
+
+BULK INSERT [bronze].[crm_sales_details]
+FROM 'UnknownForPrivacy'
+WITH(
+	FIRSTROW = 2,
+	FIELDTERMINATOR = ',',
+	TABLOCK
+)
+
+SELECT
+COUNT(*) TotalColumns
+FROM bronze.crm_sales_details;
+
+TRUNCATE TABLE [bronze].[erp_cust_AZ12];
+
+BULK INSERT [bronze].[erp_cust_AZ12]
+FROM 'UnknownForPrivacy'
+WITH(
+	FIRSTROW = 2,
+	FIELDTERMINATOR = ',',
+	TABLOCK
+)
+
+SELECT
+COUNT(*) TotalColumns
+FROM [bronze].[erp_cust_AZ12];
+
+TRUNCATE TABLE [bronze].[erp_LOC_A101];
+
+BULK INSERT [bronze].[erp_LOC_A101]
+FROM 'UnknownForPrivacy'
+WITH(
+	FIRSTROW = 2,
+	FIELDTERMINATOR = ',',
+	TABLOCK
+)
+
+SELECT
+COUNT(*) TotalColumns
+FROM [bronze].[erp_LOC_A101];
+
+TRUNCATE TABLE bronze.erp_PX_CAT_G1V2;
+
+BULK INSERT bronze.erp_PX_CAT_G1V2
+FROM 'UnknownForPrivacy'
+WITH(
+	FIRSTROW = 2,
+	FIELDTERMINATOR = ',',
+	TABLOCK
+)
+
+SELECT
+COUNT(*) TotalColumns
+FROM bronze.erp_PX_CAT_G1V2;
