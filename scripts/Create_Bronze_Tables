@@ -1,6 +1,20 @@
+/* 
+	FUNCTION: 
+	This script is meant to create all the tables you need in order to then load the data from the source with the structure better suits it.
+	It also has a function to check if the table already exists, if is yes, then it would be deleted and then, another one would be 
+	created. 
+
+	WARNING:
+	Use this script with caution, because it would delete all the tables you might have created. 
+	Always check first if they are loaded with data and make copies in case you need them
+*/
+
+
+-- Function that check wether a tables exists or not, if it exists then it would be droped. 
 IF OBJECT_ID ('bronze.crm_cust_info', 'U') IS NOT NULL
 	DROP TABLE bronze.crm_cust_info;
 
+-- Creates a Table with the same structure as de csv source files
 CREATE TABLE bronze.crm_cust_info (
 	cst_id INT,
 	cst_key NVARCHAR(50),
